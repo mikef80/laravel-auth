@@ -10,6 +10,7 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
+  // get all users
   public function index(Request $request)
   {
     $users = User::all();
@@ -19,6 +20,7 @@ class AuthController extends Controller
     ], 200);
   }
 
+  // register
   public function register(Request $request)
   {
     $validator = Validator::make($request->all(), [
@@ -55,6 +57,7 @@ class AuthController extends Controller
     ], 201);
   }
 
+  // login
   public function login(Request $request)
   {
     $validator = Validator::make($request->all(), [
@@ -84,6 +87,7 @@ class AuthController extends Controller
     ], 200);
   }
 
+  // logout
   public function logout(Request $request)
   {
     $request->user()->currentAccessToken()->delete();
@@ -93,6 +97,7 @@ class AuthController extends Controller
     ], 200);
   }
 
+  // delete
   public function delete(Request $request)
   {
     $user = $request->user();
@@ -106,6 +111,7 @@ class AuthController extends Controller
     ], 200);
   }
 
+  // get logged in user
   public function get(Request $request)
   {
     $user = $request->user();
