@@ -10,6 +10,15 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
+  public function index(Request $request)
+  {
+    $users = User::all();
+
+    return response()->json([
+      $users
+    ], 200);
+  }
+
   public function register(Request $request)
   {
     $validator = Validator::make($request->all(), [

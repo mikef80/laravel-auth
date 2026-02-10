@@ -11,6 +11,10 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::delete('/delete', [AuthController::class, 'delete'])->middleware('auth:sanctum');
-Route::get('/user', [AuthController::class, 'get'])->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->group(function () {
+  Route::post('/logout', [AuthController::class, 'logout']);
+  Route::delete('/delete', [AuthController::class, 'delete']);
+  Route::get('/users', [AuthController::class, 'index']);
+  Route::get('/user', [AuthController::class, 'get']);
+});
